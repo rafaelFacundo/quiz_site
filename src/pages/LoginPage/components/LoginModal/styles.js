@@ -24,20 +24,6 @@ const H3 = styled.h3`
     font-size: 48px;
     
 `
-const Text = styled.p`
-    color: ${props => props.textColor || "black"};
-    font-size: ${props => props.textSize || "16px"};
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 285px;
-    &:after, &:before {
-        content: "";
-        flex: 1;
-        border-bottom: ${props => props.afterBeforeContent || "0px"} solid gray;
-        margin: 6px;
-    }
-`
 const Label = styled.label`
     text-align: left;
     margin-bottom: 8px;
@@ -51,17 +37,7 @@ const Input = styled.input`
     padding: 20px;
     border: 2.5px solid lightgray;
 `
-const Button = styled.button`
-    border-radius: 50px;
-    margin-top: 15px;
-    background-color: #D9D9D9;
-    height: 60px;
-    width: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    font-weight: bold;
-`
+
 const Image = styled.img`
     width: 30px;
     height: 30px;
@@ -70,9 +46,7 @@ export {
     MainDiv,
     MainContent,
     H3,
-    Text,
     Label, 
     Input,
-    Button,
     Image,
 }

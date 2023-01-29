@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 import GoogleIcon from '../../../../assets/google_login_icon.png';
 import {
     MainDiv,
@@ -6,11 +7,9 @@ import {
     H3,
     Label,
     Input,
-    Button,
-    Text,
     Image
 } from './styles'
-
+import { LoginButton, Text } from "../../../../components/styles";
 
 export default function LoginModal() {
     return(
@@ -30,18 +29,18 @@ export default function LoginModal() {
                     placeholder="Type your password here"
                     type="password"
                 />
-                <Button>Make Login</Button>
-                <Text afterBeforeContent="2px">OR</Text>
-                <Button>
+                <LoginButton>Make Login</LoginButton>
+                <Text afterBeforeBorder="2px">OR</Text>
+                <LoginButton>
                     <Image src={GoogleIcon} />
                     Make login with Google
-                </Button>
+                </LoginButton>
                 <Text textSize="12px" >If you do not have an account</Text>
                 <Text 
                     textColor="#4025E4"
                     textSize="12px"
                 >
-                    CLICK HERE
+                    <Link to={'/signup'}>CLICK HERE</Link>
                 </Text>
             </MainContent>
         </MainDiv>

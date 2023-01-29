@@ -1,20 +1,30 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import LoginSignUpPage from './pages/LoginSignUpPage'
+import LoginPage from './pages/LoginPage'
 import NotFoundURLPage from './pages/NotFoundURLPage'
+import SignUpPage from './pages/SignUpPage'
 import './index.css'
 import {
   createBrowserRouter,
-  RouterProvider
+  RouterProvider,
+  Link
 } from 'react-router-dom'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <LoginSignUpPage />,
-    errorElement: <NotFoundURLPage />
+    element: <> <Link to={'/login'}>Login</Link> <Link to={'/signup'}>signup</Link> </>
   },
+  {
+    path: '/login',
+    element: <LoginPage />,
+   /*  errorElement: <NotFoundURLPage /> */
+  },
+  {
+    path: '/signup',
+    element: <SignUpPage />
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

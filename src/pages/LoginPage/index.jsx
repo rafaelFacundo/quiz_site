@@ -1,10 +1,11 @@
 import React from "react";
 import LoginModal from "./components/LoginModal";
+import SignUpModal from "../SignUpPage/components/SignUpModal";
 import {
     MainContent,
 } from "./styles";
 
-export default function LoginSignUpPage() {
+export default function LoginPage() {
     return(
         <MainContent>
             <LoginModal />

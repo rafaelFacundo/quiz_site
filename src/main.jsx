@@ -1,9 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-
-import LoginPage from './pages/LoginPage'
-import NotFoundURLPage from './pages/NotFoundURLPage'
-import SignUpPage from './pages/SignUpPage'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import HomePage from './pages/HomePage';
+import SignUpPage from './pages/SignUpPage';
+import LoginPage from './pages/LoginPage';
+import NotFoundURLPage from './pages/NotFoundURLPage';
 import './index.css'
 import {
   createBrowserRouter,
@@ -14,7 +14,7 @@ import {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <> <Link to={'/login'}>Login</Link> <Link to={'/signup'}>signup</Link> </>
+    element: <HomePage />
   },
   {
     path: '/login',

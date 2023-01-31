@@ -8,11 +8,8 @@ import {
     MainDiv,
     MainContent,
     H3,
-    Label,
-    Input,
-    Image
 } from './styles'
-import { LoginButton, Text } from "../../../../components/styles";
+import { LoginButton, Text, Image } from "../../../../components/styles";
 import { Link } from "react-router-dom";
 
 export default function SignUpModal() {

@@ -38,15 +38,11 @@ const Input = styled.input`
     border: 2.5px solid lightgray;
 `
 
-const Image = styled.img`
-    width: 30px;
-    height: 30px;
-`
+
 export {
     MainDiv,
     MainContent,
     H3,
     Label, 
     Input,
-    Image,
 }

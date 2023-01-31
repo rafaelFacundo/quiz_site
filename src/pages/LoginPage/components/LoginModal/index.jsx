@@ -7,9 +7,8 @@ import {
     H3,
     Label,
     Input,
-    Image
 } from './styles'
-import { LoginButton, Text } from "../../../../components/styles";
+import { LoginButton, Text, Image } from "../../../../components/styles";
 
 export default function LoginModal() {
     return(

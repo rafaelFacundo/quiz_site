@@ -7,8 +7,10 @@ const MainContent = styled.div`
 `;
 const ContedDiv = styled.div`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-around;
+    box-sizing: border-box;
+    padding: 10px;
 `;
 const Navigation = styled.div`
     background-color: white;

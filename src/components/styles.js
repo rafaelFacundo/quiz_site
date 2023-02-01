@@ -15,9 +15,9 @@ const Text = styled.p`
     color: ${props => props.textColor || "black"};
     font-size: ${props => props.textSize || "16px"};
     display: flex;
-    align-items: center;
+    align-items: ${props => props.alignItems || "center"};
     justify-content: space-around;
-    width: 285px;
+    width: ${props => props.textWidth || "285px"};
     &:after, &:before {
         content: "";
         flex: 1;

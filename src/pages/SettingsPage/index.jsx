@@ -10,6 +10,7 @@ import {
 } from "./styles";
 import { Image, Text } from "../../components/styles";
 import ProfileInformation from "./components/ProfileInformations";
+import StatisticsComponent from "./components/Statistics";
 import Header from "../../components/Header";
 
 export default function SettingsPage() {
@@ -43,7 +44,7 @@ export default function SettingsPage() {
                     </NavList>
                 </Navigation>
                 {
-                    whatToShow && <ProfileInformation />
+                    whatToShow && <StatisticsComponent />
                 }
             </ContedDiv>
         </MainContent>

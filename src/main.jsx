@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
+import SettingsPage from './pages/SettingsPage';
 import NotFoundURLPage from './pages/NotFoundURLPage';
 import './index.css'
 import {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     element: <SignUpPage />
+  },
+  {
+    path: '/settings',
+    element: <SettingsPage />
   }
 ])
 

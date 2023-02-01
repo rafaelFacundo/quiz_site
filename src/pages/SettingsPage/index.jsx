@@ -9,6 +9,7 @@ import {
     NavOption
 } from "./styles";
 import { Image, Text } from "../../components/styles";
+import ProfileInformation from "./components/ProfileInformations";
 import Header from "../../components/Header";
 
 export default function SettingsPage() {
@@ -26,22 +27,24 @@ export default function SettingsPage() {
                         <NavOption onClick={() => {setWhatToShow(true)}}>
                             <Image
                                 src={ProfileIcon}
-                                imgWidth={"20px"}
-                                imgHeight={"20px"}
-                            />
+                                imgWidth={"30px"}
+                                imgHeight={"30px"}
+                            /> 
                             <Text>PROFILE</Text>
                         </NavOption>
                         <NavOption onClick={() => {setWhatToShow(false)}}>
                             <Image
                                 src={ChartIcon}
-                                imgWidth={"20px"}
-                                imgHeight={"20px"}
+                                imgWidth={"30px"}
+                                imgHeight={"30px"}
                             />
                             <Text>STATISTICS</Text>
                         </NavOption>
                     </NavList>
                 </Navigation>
-                
+                {
+                    whatToShow && <ProfileInformation />
+                }
             </ContedDiv>
         </MainContent>
     );

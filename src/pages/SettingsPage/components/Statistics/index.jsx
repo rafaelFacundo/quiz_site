@@ -4,7 +4,8 @@ import {
     GeneralInfoDiv,
     ContentDiv,
     QuizzesInformation,
-    Text
+    Text,
+    RightAndWrongDiv
 } from "./styles";
 import { Image } from "../../../../components/styles";
 
@@ -12,13 +13,17 @@ export default function StatisticsComponent() {
     return(
         <MainContent>
             <ContentDiv>
-                <Text>GENERAL INFORMATION: </Text>
+                
                 <GeneralInfoDiv>
+                    <Text>GENERAL INFORMATION: </Text>
                     <Text>Number of quizzes created: 10</Text>
                     <Text>Number of quizzes played: 50</Text>
                     <Text>Number of answered questions: 100</Text>
-                    <Text textColor={"green"}>Right: 90</Text>
-                    <Text textColor={"red"}>Wrong: 10</Text>
+                    <RightAndWrongDiv>
+                        <Text textColor={"green"}>Right: 90</Text>
+                        <Text textColor={"red"}>Wrong: 10</Text>
+                    </RightAndWrongDiv>
+                    
                 </GeneralInfoDiv>
                 <QuizzesInformation>
                     <Text textWidth={"100%"} alignItems={"flex-start"} >Created quizzes information: </Text>

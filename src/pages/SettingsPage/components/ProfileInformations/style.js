@@ -8,9 +8,28 @@ const MainContent = styled.div`
     height: 500px;
 `;
 
-const ProfilePhotoDiv = styled.div``
+const ProfilePhotoDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    padding: 15px;
+    border-bottom: 2px solid lightgray;
+`
+const P = styled.p`
+    color: black;
+`;
+const PersonalInformationDiv = styled.div``;
+const Label = styled.div``;
+const InputAndIConDiv = styled.div``;
+const Input = styled.input``;
 
 export {
     MainContent,
-    ProfilePhotoDiv
+    ProfilePhotoDiv,
+    P,
+    PersonalInformationDiv,
+    Label,
+    InputAndIConDiv,
+    Input
 }

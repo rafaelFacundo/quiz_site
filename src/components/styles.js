@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 const LoginButton = styled.button`
     border-radius: 50px;
-    margin-top: 15px;
-    background-color: #D9D9D9;
-    height: 60px;
-    width: 300px;
+    margin-top: ${ props => props.marginTop || "15px"};
+    margin-left: ${props => props.buttoMarginLeft || "0px"};
+    background-color: ${props => props.buttonBackground || "#D9D9D9"};
+    height: ${ props => props.buttonHeight || "60px"};
+    width: ${ props => props.buttonWidth || "300px"};
     display: flex;
     align-items: center;
     justify-content: space-around;

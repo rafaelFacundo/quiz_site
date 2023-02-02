@@ -6,6 +6,8 @@ const MainContent = styled.div`
     border-radius: 20px;
     width: 900px; 
     height: 500px;
+    box-sizing: border-box;
+    padding: 15px;
 `;
 
 const ProfilePhotoDiv = styled.div`
@@ -19,10 +21,36 @@ const ProfilePhotoDiv = styled.div`
 const P = styled.p`
     color: black;
 `;
-const PersonalInformationDiv = styled.div``;
-const Label = styled.div``;
-const InputAndIConDiv = styled.div``;
-const Input = styled.input``;
+const PersonalInformationDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+`;
+const Label = styled.label`
+    color: black;
+`;
+const InputLabelDiv = styled.div`
+    width: 300px;
+    margin: 10px;
+`;
+const InputAndIConDiv = styled.div`
+    position: relative;
+`;
+const Input = styled.input`
+    width: 100%;
+    height: 40px;
+    padding-left: 40px;
+`;
+const Icon = styled.img`
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+`;
+
 
 export {
     MainContent,
@@ -31,5 +59,7 @@ export {
     PersonalInformationDiv,
     Label,
     InputAndIConDiv,
-    Input
+    Input,
+    InputLabelDiv,
+    Icon
 }

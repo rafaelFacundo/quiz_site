@@ -44,7 +44,7 @@ export default function SettingsPage() {
                     </NavList>
                 </Navigation>
                 {
-                    whatToShow && <StatisticsComponent />
+                    whatToShow ? <ProfileInformation /> : <StatisticsComponent />
                 }
             </ContedDiv>
         </MainContent>

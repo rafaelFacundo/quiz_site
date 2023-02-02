@@ -13,7 +13,6 @@ export default function StatisticsComponent() {
     return(
         <MainContent>
             <ContentDiv>
-                
                 <GeneralInfoDiv>
                     <Text>GENERAL INFORMATION: </Text>
                     <Text>Number of quizzes created: 10</Text>
@@ -23,14 +22,13 @@ export default function StatisticsComponent() {
                         <Text textColor={"green"}>Right: 90</Text>
                         <Text textColor={"red"}>Wrong: 10</Text>
                     </RightAndWrongDiv>
-                    
                 </GeneralInfoDiv>
                 <QuizzesInformation>
-                    <Text textWidth={"100%"} alignItems={"flex-start"} >Created quizzes information: </Text>
-                    <Text textWidth={"100%"}>Number of users that have played your quizzes: 200</Text>
-                    <Text textWidth={"100%"}>Number of likes in your quizzes received: 150</Text>
-                    <Text textWidth={"100%"}>Number of right answers: 100</Text>
-                    <Text textWidth={"100%"}>Number of wrong answers: 200</Text>
+                    <Text>Created quizzes information: </Text>
+                    <Text>Number of users that have played your quizzes: 200</Text>
+                    <Text>Number of likes in your quizzes received: 150</Text>
+                    <Text>Number of right answers: 100</Text>
+                    <Text>Number of wrong answers: 200</Text>
                 </QuizzesInformation>
             </ContentDiv>
         </MainContent>

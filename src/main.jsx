@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 import SettingsPage from './pages/SettingsPage';
+import PlayQuizPage from './pages/PlayQuizPage';
 import NotFoundURLPage from './pages/NotFoundURLPage';
 import './index.css'
 import {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: '/settings',
     element: <SettingsPage />
+  },
+  {
+    path: '/playQuiz',
+    element: <PlayQuizPage />
   }
 ])
 

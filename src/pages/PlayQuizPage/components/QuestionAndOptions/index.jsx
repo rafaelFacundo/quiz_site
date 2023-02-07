@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const MainContent = styled.div`
@@ -49,23 +49,45 @@ const AnswerRecord = styled.div`
     margin-right: 5px;
 `;
 
-export default function QuestionAndOptions() {
+export default function QuestionAndOptions({ListOfQuestions}) {
+    let currentId = 0;
+    const [currentQuestion, setCurrentQuestion] = useState(ListOfQuestions[currentId]);
+    const [listOfColor, setListOfColors] = useState(new Array(ListOfQuestions.length).fill('gray'));
+
+    console.log(ListOfQuestions.length)
+
+    console.log(currentQuestion.options)
+
     return(
         <MainContent>
             <AnswersRecordDiv>
                 <AnswersRecordContentDiv>
-                    <AnswerRecord answerColor={"red"} />
-                    <AnswerRecord answerColor={"green"} />
-                    <AnswerRecord answerColor={"yellow"} />
-                    <AnswerRecord />
+                    {
+                        listOfColor.map((color, index) => {
+                            return(
+                                <AnswerRecord answerColor={color} key={index} />
+                            );
+                        })
+                    }
                 </AnswersRecordContentDiv>
             </AnswersRecordDiv>
-            <QuizQuestion>Olá mundo</QuizQuestion>
+            <QuizQuestion>{currentQuestion.question}</QuizQuestion>
             <OptionsDiv>
-                <AnswerOption>opção 1</AnswerOption>
-                <AnswerOption>opção 2</AnswerOption>
-                <AnswerOption>opção 3</AnswerOption>
-                <AnswerOption>opção 4</AnswerOption>
+                {
+                    currentQuestion.options.map((option, index) => {
+                        return(
+                            <AnswerOption
+                                onClick={() => {
+                                    setCurrentQuestion(ListOfQuestions[currentId+1]);
+                                    currentId += 1;
+                                }}
+                                key={index}
+                            >
+                                {option.text}
+                            </AnswerOption>
+                        );
+                    })
+                }
             </OptionsDiv>
         </MainContent>
     );

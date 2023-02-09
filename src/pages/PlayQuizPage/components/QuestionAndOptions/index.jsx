@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+
 const MainContent = styled.div`
     display: flex;
     align-items: center;
@@ -20,7 +21,7 @@ const AnswerOption = styled.button`
     &:hover {
         transform: scale(1.1);
         background-color: #696969;
-    }
+    };
 `;
 const OptionsDiv = styled.div`
     display: flex;
@@ -49,14 +50,40 @@ const AnswerRecord = styled.div`
     margin-right: 5px;
 `;
 
+const Text = styled.p`
+    color: black;
+`
+
 export default function QuestionAndOptions({ListOfQuestions}) {
     let currentId = 0;
+    let arrayOfInitialColors = new Array(ListOfQuestions.length).fill('gray');
+    arrayOfInitialColors[0] = "yellow";
+    let [isQuizOver, setIsQuizOver] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState(ListOfQuestions[currentId]);
-    const [listOfColor, setListOfColors] = useState(new Array(ListOfQuestions.length).fill('gray'));
+    const [listOfColor, setListOfColors] = useState(arrayOfInitialColors);
 
     console.log(ListOfQuestions.length)
 
     console.log(currentQuestion.options)
+
+    function checkAnswerAndGoNext(indexOfAnswer) {
+        let newArray = [...listOfColor];
+        
+        if (currentQuestion.options[indexOfAnswer].iR === 1) {
+            newArray[currentId] = 'green';
+        }else {
+            newArray[currentId] = 'red';
+        }
+        currentId += 1;
+        
+        if (currentId < ListOfQuestions.length) {
+            newArray[currentId] = "yellow";
+            setListOfColors(newArray);
+            setCurrentQuestion(ListOfQuestions[currentId]);
+        }else {
+            setIsQuizOver(!isQuizOver);
+        }
+    }
 
     return(
         <MainContent>
@@ -74,19 +101,18 @@ export default function QuestionAndOptions({ListOfQuestions}) {
             <QuizQuestion>{currentQuestion.question}</QuizQuestion>
             <OptionsDiv>
                 {
-                    currentQuestion.options.map((option, index) => {
+                    isQuizOver ? <Text>the game is end</Text> :(currentQuestion.options.map((option, index) => {
                         return(
                             <AnswerOption
                                 onClick={() => {
-                                    setCurrentQuestion(ListOfQuestions[currentId+1]);
-                                    currentId += 1;
+                                    checkAnswerAndGoNext(index);
                                 }}
                                 key={index}
                             >
                                 {option.text}
                             </AnswerOption>
                         );
-                    })
+                    }))
                 }
             </OptionsDiv>
         </MainContent>

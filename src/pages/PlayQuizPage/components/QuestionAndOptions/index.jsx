@@ -53,34 +53,41 @@ const AnswerRecord = styled.div`
 const Text = styled.p`
     color: black;
 `
+let currentId = 0;
 
 export default function QuestionAndOptions({ListOfQuestions}) {
-    let currentId = 0;
     let arrayOfInitialColors = new Array(ListOfQuestions.length).fill('gray');
     arrayOfInitialColors[0] = "yellow";
     let [isQuizOver, setIsQuizOver] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState(ListOfQuestions[currentId]);
     const [listOfColor, setListOfColors] = useState(arrayOfInitialColors);
 
-    console.log(ListOfQuestions.length)
-
-    console.log(currentQuestion.options)
-
     function checkAnswerAndGoNext(indexOfAnswer) {
         let newArray = [...listOfColor];
         
         if (currentQuestion.options[indexOfAnswer].iR === 1) {
+            console.log("if")
+            console.log(currentQuestion.question)
+            console.log(currentId)
             newArray[currentId] = 'green';
         }else {
+            console.log("else")
+            console.log(currentQuestion.question)
+            console.log(currentId)
             newArray[currentId] = 'red';
         }
         currentId += 1;
         
+        
         if (currentId < ListOfQuestions.length) {
             newArray[currentId] = "yellow";
             setListOfColors(newArray);
+            console.log("if" + currentId)
             setCurrentQuestion(ListOfQuestions[currentId]);
         }else {
+
+            console.log("else" + currentId)
+            setListOfColors(newArray);
             setIsQuizOver(!isQuizOver);
         }
     }

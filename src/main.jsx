@@ -5,6 +5,7 @@ import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 import SettingsPage from './pages/SettingsPage';
 import PlayQuizPage from './pages/PlayQuizPage';
+import CreateQuizPage from './pages/CreateQuizPage';
 import NotFoundURLPage from './pages/NotFoundURLPage';
 import './index.css'
 import {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: '/playQuiz',
     element: <PlayQuizPage />
+  },
+  {
+    path: '/createQuiz',
+    element: <CreateQuizPage />
   }
 ])
 

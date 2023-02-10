@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
+import FinishQuiz from "../FinishQuizComponent";
 
 const MainContent = styled.div`
     display: flex;
@@ -36,12 +36,14 @@ const AnswersRecordDiv = styled.div`
     position: absolute;
     top: 0px;
     left: 0px;
+    width: 100%;
 `;
 const AnswersRecordContentDiv = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    overflow-x: scroll;
 `;
 const AnswerRecord = styled.div`
     background-color: ${props => props.answerColor || "gray"};
@@ -54,39 +56,28 @@ const Text = styled.p`
     color: black;
 `
 let currentId = 0;
-
+let totalOfPoints = 0;
 export default function QuestionAndOptions({ListOfQuestions}) {
     let arrayOfInitialColors = new Array(ListOfQuestions.length).fill('gray');
     arrayOfInitialColors[0] = "yellow";
-    let [isQuizOver, setIsQuizOver] = useState(false);
+    const [isQuizOver, setIsQuizOver] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState(ListOfQuestions[currentId]);
     const [listOfColor, setListOfColors] = useState(arrayOfInitialColors);
 
     function checkAnswerAndGoNext(indexOfAnswer) {
         let newArray = [...listOfColor];
-        
         if (currentQuestion.options[indexOfAnswer].iR === 1) {
-            console.log("if")
-            console.log(currentQuestion.question)
-            console.log(currentId)
             newArray[currentId] = 'green';
+            totalOfPoints += 1;
         }else {
-            console.log("else")
-            console.log(currentQuestion.question)
-            console.log(currentId)
             newArray[currentId] = 'red';
         }
         currentId += 1;
-        
-        
         if (currentId < ListOfQuestions.length) {
             newArray[currentId] = "yellow";
             setListOfColors(newArray);
-            console.log("if" + currentId)
             setCurrentQuestion(ListOfQuestions[currentId]);
         }else {
-
-            console.log("else" + currentId)
             setListOfColors(newArray);
             setIsQuizOver(!isQuizOver);
         }
@@ -105,23 +96,31 @@ export default function QuestionAndOptions({ListOfQuestions}) {
                     }
                 </AnswersRecordContentDiv>
             </AnswersRecordDiv>
-            <QuizQuestion>{currentQuestion.question}</QuizQuestion>
-            <OptionsDiv>
-                {
-                    isQuizOver ? <Text>the game is end</Text> :(currentQuestion.options.map((option, index) => {
-                        return(
-                            <AnswerOption
-                                onClick={() => {
-                                    checkAnswerAndGoNext(index);
-                                }}
-                                key={index}
-                            >
-                                {option.text}
-                            </AnswerOption>
-                        );
-                    }))
-                }
-            </OptionsDiv>
+            {
+               isQuizOver ? 
+               <FinishQuiz pointMade={totalOfPoints} maxPoints={ListOfQuestions.length}/> : 
+               (
+                <>
+                    <QuizQuestion>{currentQuestion.question}</QuizQuestion>
+                    <OptionsDiv>
+                        {
+                        currentQuestion.options.map((option, index) => {
+                                return(
+                                    <AnswerOption
+                                        onClick={() => {
+                                            checkAnswerAndGoNext(index);
+                                        }}
+                                        key={index}
+                                    >
+                                        {option.text}
+                                    </AnswerOption>
+                                );
+                            })
+                        }
+                    </OptionsDiv>
+                </>
+                )
+            }
         </MainContent>
     );
 }

@@ -48,7 +48,7 @@ const OptionsDiv = styled.div`
 const InputQuestion = styled.textarea`
     font-size: 20px;
     width: 90%;
-    height: 50px;
+    height: 100px;
     margin: 5px;
     resize: none;
     border: none;
@@ -79,6 +79,7 @@ const Image = styled.img`
         transform: scale(1.3);
         
     }
+    pointer-events: ${props => props.enabled};
 `;
 const FinishQuestionButton = styled.button`
     border-radius: 50px;

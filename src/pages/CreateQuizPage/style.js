@@ -27,7 +27,7 @@ const AnswerOption = styled.input`
     width: 350px;
     height: 50px;
     margin: 5px;
-    background-color: #D9D9D9;
+    background-color: ${props => props.selected || "#D9D9D9"};
     border-radius: 0px;
     transition: all 0.3s;
     &:focus{
@@ -96,6 +96,9 @@ const FinishQuestionButton = styled.button`
     bottom: 30px;
     right: 15px;
 `;
+const H3 = styled.h3`
+    color: black;
+`;
 
 export {
     MainContent,
@@ -106,5 +109,6 @@ export {
     InputQuestion,
     InputsDiv,
     Image,
-    FinishQuestionButton
+    FinishQuestionButton,
+    H3
 }

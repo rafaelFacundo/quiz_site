@@ -11,9 +11,11 @@ import {
     InputQuestion,
     InputsDiv,
     Image,
-    FinishQuestionButton
+    FinishQuestionButton,
+    H3
 } from "./style";
 
+const currentId = -1;
 export default function CreateQuizPage() {
 
     /* 
@@ -29,9 +31,13 @@ export default function CreateQuizPage() {
         },
     */
 
-    const [listOfQuestions, setListOfQuestions] = useState([{}]);
+    const [listOfQuestions, setListOfQuestions] = useState([]);
+    const [isAllFiled, setIsAllFiled] = useState(false);
+    const [isQuestionDone, setIsQuestionDone] = useState(false);
+    const [rightOptionCurrentQuestion, setRightOption] = useState(-1);
     const [currentQuestion, setCurrentQuestion] = useState({
         question: "",
+        isDone: false,
         options: [
             {text: "", iR: 0},
             {text: "", iR: 0},
@@ -39,84 +45,115 @@ export default function CreateQuizPage() {
             {text: "", iR: 0},
         ]
     });
-    const [currentId, SetCurrentId] = useState(0);
     
-    function mountTheQuestion(questionTitle, rightAnswer, secondOption, thirdOption, fourthOption) {
-        const newQuestion = {
-            questions_image: null,
-            question: questionTitle,
+
+
+    function mountQuestion(text,index) {
+        setIsQuestionDone(false);
+        setIsAllFiled(false);
+        setRightOption(-1);
+        let newObject = {...currentQuestion};
+        let numberOfOptionsFiled = 0;
+        if (index < 4){
+            newObject.options[index] = {text, isR: 0};
+        }else {
+            newObject.question = text;
+        }
+        setCurrentQuestion(newObject);
+        newObject.options.forEach(option => {
+            if(option.text.length > 0)
+                numberOfOptionsFiled += 1;
+        });
+        if (newObject.question.length > 0 && numberOfOptionsFiled == 4)
+            setIsAllFiled(true);
+    }
+
+    function saveQuestionAndNext() {
+        const questionToPush = {...currentQuestion}
+        questionToPush.options[rightOptionCurrentQuestion].iR = 1;
+        questionToPush.isDone = true;
+        listOfQuestions.push(questionToPush);
+        console.log(listOfQuestions);
+        setCurrentQuestion({
+            question: "",
+            isDone: false,
             options: [
-                {text: rightAnswer, iR:1},
-                {text: secondOption, iR:0},
-                {text: thirdOption, iR:0},
-                {text: fourthOption, iR:0}
+                {text: "", iR: 0},
+                {text: "", iR: 0},
+                {text: "", iR: 0},
+                {text: "", iR: 0},
             ]
-        };
-        let newListOfQuestion = [...listOfQuestions];
-        newListOfQuestion.push(newQuestion);
-        setListOfQuestions(newListOfQuestion);
+        });
+        setRightOption(-1);
+        setIsAllFiled(false);
     };
 
-    function putValueOfOption(text,index) {
-        let newObject = {...currentQuestion};
-        newObject.options[index] = {text, isR: 0};
-        setCurrentQuestion(newObject);
-    }
+    const [teste, setTeste] = useState("")
     
     return(
         <MainContent>
             <Header />
             <ContedDiv>
                 <Image src={LeftArrow} Top={"50vh"} Left={"30px"} enabled={(currentId > 0) ? "all" : "none"}/>
-                <Image src={RightArrow} Top={"50vh"} Right={"30px"} enabled={(currentId < listOfQuestions.length) ? "all" : "none"}/>
+                <Image src={RightArrow} Top={"50vh"} Right={"30px"} enabled={(currentId < listOfQuestions.length && currentId > -1) ? "all" : "none"}/>
                 <CreateQuizDiv>
                     <InputsDiv>
-                        <InputQuestion 
+                        <InputQuestion
+                            value={currentQuestion.question}
                             placeholder="TYPE THE QUESTION HERE"
                             maxLength={200}
-                            onChange={(e) => {
-                                let newObject = {...currentQuestion};
-                                newObject.question = (e.target.value);
-                                setCurrentQuestion(newObject);
-                            }}
+                            onChange={(e) => {mountQuestion(e.target.value, 4); setTeste(e.target.value)}}
                         />
                         <OptionsDiv>
                             <AnswerOption
-                                placeholder="RIGHT ANSWER HERE"
+                                value={currentQuestion.options[0].text}
+                                selected={(rightOptionCurrentQuestion == 0) && "green"}
+                                placeholder="FIRST OPTION HERE"
                                 maxLength={60}
                                 onChange={(e) => {
-                                    putValueOfOption(e.target.value,0);
+                                    mountQuestion(e.target.value,0);
                                 }}
+                                onClick={() => { isAllFiled && setRightOption(0); setIsQuestionDone(true)}}
+                                
                             />
                             <AnswerOption
+                                value={currentQuestion.options[1].text}
+                                selected={(rightOptionCurrentQuestion == 1) && "green"}
                                 placeholder="SECOND OPTION HERE"
                                 maxLength={60}
                                 onChange={(e) => {
-                                    putValueOfOption(e.target.value,1);
+                                    mountQuestion(e.target.value,1);
                                 }}
+                                onClick={() => {isAllFiled && setRightOption(1); setIsQuestionDone(true)}}
                             />
                             <AnswerOption
+                                value={currentQuestion.options[2].text}
+                                selected={(rightOptionCurrentQuestion == 2) && "green"}
                                 placeholder="THIRD OPTION HERE"
                                 maxLength={60}
                                 onChange={(e) => {
-                                    putValueOfOption(e.target.value,2);
+                                    mountQuestion(e.target.value,2);
                                 }}
+                                onClick={() => {isAllFiled && setRightOption(2); setIsQuestionDone(true)}}
                             />
                             <AnswerOption
+                                value={currentQuestion.options[3].text}
+                                selected={(rightOptionCurrentQuestion == 3) && "green"}
                                 placeholder="FOURTH OPTION HERE"
                                 maxLength={60}
                                 onChange={(e) => {
-                                    putValueOfOption(e.target.value,3);
+                                    mountQuestion(e.target.value,3);
                                 }}
+                                onClick={() => {isAllFiled && setRightOption(3); setIsQuestionDone(true)}}
                             />
                         </OptionsDiv>
                     </InputsDiv>
+                    {isAllFiled && <H3>select the options that is the right answer!</H3>}
                 </CreateQuizDiv>
+                
                 <FinishQuestionButton
-                    onClick={() => {
-                        console.log(currentQuestion)
-                    }}
-                >FINISH QUESTION</FinishQuestionButton>
+                    onClick={() => { isQuestionDone && saveQuestionAndNext();}}
+                >FINISH AND ADD QUESTION</FinishQuestionButton>
             </ContedDiv>
         </MainContent>
     );

@@ -15,27 +15,9 @@ import {
     H3
 } from "./style";
 
-const currentId = -1;
+let currentId = -1;
 export default function CreateQuizPage() {
-
-    /* 
-        {   
-            questions_image: null,
-            question: 'Who is the creator of naruto',
-            options: [
-                {text: 'Masashi kishimoto', iR: 1},
-                {text: 'Akira toriama', iR: 0},
-                {text: 'junji ito', iR: 0},
-                {text: 'hajime yatate', iR: 0},
-            ]
-        },
-    */
-
-    const [listOfQuestions, setListOfQuestions] = useState([]);
-    const [isAllFiled, setIsAllFiled] = useState(false);
-    const [isQuestionDone, setIsQuestionDone] = useState(false);
-    const [rightOptionCurrentQuestion, setRightOption] = useState(-1);
-    const [currentQuestion, setCurrentQuestion] = useState({
+    const questionPattern = {
         question: "",
         isDone: false,
         options: [
@@ -44,7 +26,12 @@ export default function CreateQuizPage() {
             {text: "", iR: 0},
             {text: "", iR: 0},
         ]
-    });
+    };
+    const [listOfQuestions, setListOfQuestions] = useState([]);
+    const [isAllFiled, setIsAllFiled] = useState(false);
+    const [isQuestionDone, setIsQuestionDone] = useState(false);
+    const [rightOptionCurrentQuestion, setRightOption] = useState(-1);
+    const [currentQuestion, setCurrentQuestion] = useState(questionPattern);
     
 
 
@@ -74,19 +61,23 @@ export default function CreateQuizPage() {
         questionToPush.isDone = true;
         listOfQuestions.push(questionToPush);
         console.log(listOfQuestions);
-        setCurrentQuestion({
-            question: "",
-            isDone: false,
-            options: [
-                {text: "", iR: 0},
-                {text: "", iR: 0},
-                {text: "", iR: 0},
-                {text: "", iR: 0},
-            ]
-        });
+        setCurrentQuestion(questionPattern);
         setRightOption(-1);
         setIsAllFiled(false);
+        if (currentId == -1) {
+            currentId += 2;
+        }
+
     };
+
+    function navigateThroughTheQuestions(numberToAdd) {
+        currentId += numberToAdd;
+        if (currentId >= listOfQuestions.length) {
+            setCurrentQuestion(questionPattern);
+        }else {
+            setCurrentQuestion(listOfQuestions[currentId])
+        }
+    }
 
     const [teste, setTeste] = useState("")
     
@@ -94,8 +85,19 @@ export default function CreateQuizPage() {
         <MainContent>
             <Header />
             <ContedDiv>
-                <Image src={LeftArrow} Top={"50vh"} Left={"30px"} enabled={(currentId > 0) ? "all" : "none"}/>
-                <Image src={RightArrow} Top={"50vh"} Right={"30px"} enabled={(currentId < listOfQuestions.length && currentId > -1) ? "all" : "none"}/>
+                <Image
+                    src={LeftArrow}
+                    Top={"50vh"}
+                    Left={"30px"}
+                    enabled={(currentId > 0) ? "all" : "none"}
+                    onClick={() => {navigateThroughTheQuestions(-1)}}
+                />
+                <Image
+                    src={RightArrow}
+                    Top={"50vh"} Right={"30px"}
+                    enabled={(currentId < listOfQuestions.length && currentId > -1) ? "all" : "none"}
+                    onClick={() => {navigateThroughTheQuestions(+1)}}  
+                />
                 <CreateQuizDiv>
                     <InputsDiv>
                         <InputQuestion

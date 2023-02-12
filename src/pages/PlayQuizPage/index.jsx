@@ -20,7 +20,6 @@ export default function PlayQuizPage(){
         questions: [
             {   
                 questions_image: null,
-                id: 0,
                 question: 'Who is the creator of naruto',
                 options: [
                     {text: 'Masashi kishimoto', iR: 1},
@@ -31,7 +30,6 @@ export default function PlayQuizPage(){
             },
             {   
                 questions_image: null,
-                id: 1,
                 question: 'Who is the creator of dragon ball',
                 options: [
                     {text: 'matt groening', iR: 1},
@@ -42,7 +40,6 @@ export default function PlayQuizPage(){
             },
             {   
                 questions_image: null,
-                id: 1,
                 question: 'Who is the sadsadas of dragon ball',
                 options: [
                     {text: 'matt groening', iR: 1},
@@ -53,7 +50,6 @@ export default function PlayQuizPage(){
             },
             {   
                 questions_image: null,
-                id: 1,
                 question: 'Who is the creaasdasdasdtor of dragon ball',
                 options: [
                     {text: 'matt groening', iR: 1},

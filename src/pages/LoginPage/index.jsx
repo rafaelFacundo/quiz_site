@@ -1,6 +1,6 @@
 import React from "react";
 import LoginModal from "./components/LoginModal";
-import SignUpModal from "../SignUpPage/components/SignUpModal";
+import UniverseAnimation from "./components/UniverseAnimation";
 import {
     MainContent,
 } from "./styles";
@@ -9,6 +9,7 @@ export default function LoginPage() {
     return(
         <MainContent>
             <LoginModal />
+            <UniverseAnimation />
         </MainContent>
     );
 }

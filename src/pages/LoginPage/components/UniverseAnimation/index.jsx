@@ -1,12 +1,22 @@
 import React from "react";
+import { useEffect } from "react";
+import * as THREE from 'three';
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import sunTextureImage from "./textures/sun_texture.jpg";
+import earthTextureImage from "./textures/earth_texture.jpg";
+import mercuryTextureImage from "./textures/mercury_texture.jpeg";
+import venusTextureImage from "./textures/venus_texture.jpg";
+import marsTextureImage from "./textures/mars_texture.jpeg";
+import jupiterTextureImage from "./textures/jupiter_texture.jpg";
+import saturnTextureImage from "./textures/saturn_texture.jpg";
+import uranusTextureImage from "./textures/uranus_texture.jpg";
+import neptuneTextureImage from "./textures/neptune_texture.jpg";
+
 import {
     MainContent,
     Canvas
 } from "./style";
 
-import { useEffect } from "react";
-import * as THREE from 'three';
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 
 const sizes = {
@@ -18,7 +28,7 @@ const sizes = {
 
 export default function UniverseAnimation() {
     useEffect(() => {
-        const textureLouder = new THREE.TextureLoader()
+        const textureLoader = new THREE.TextureLoader()
         const sizes = {
             width: 800,
             height: 600
@@ -26,7 +36,7 @@ export default function UniverseAnimation() {
         const scene = new THREE.Scene();
 
         
-        const earthTexture = textureLouder.load('https://media.istockphoto.com/id/182058785/photo/world-topographic-map.jpg?s=612x612&w=0&k=20&c=eWrcGjNB9o-KrzW4TC2yxUII7k5E26QIqlN3JEJu1e4=', (err) => {console.log(err)});
+        const earthTexture = textureLoader.load('https://media.istockphoto.com/id/182058785/photo/world-topographic-map.jpg?s=612x612&w=0&k=20&c=eWrcGjNB9o-KrzW4TC2yxUII7k5E26QIqlN3JEJu1e4=', (err) => {console.log(err)});
         const material = new THREE.MeshBasicMaterial({map: earthTexture});
         const SphereGeometry = new THREE.SphereGeometry(1.5,64,64)
         SphereGeometry.translate(0,0,-15)
@@ -39,68 +49,61 @@ export default function UniverseAnimation() {
 
         const mercurySphere = new THREE.SphereGeometry(0.5, 64,64);
         mercurySphere.translate(0,0, -5);
-        const mercuryMaterial = new THREE.MeshStandardMaterial({
-            color:'#424242'
-        })
+        const mercuryTexture = textureLoader.load(mercuryTextureImage);
+        const mercuryMaterial = new THREE.MeshBasicMaterial({map:mercuryTexture});
         const mercuryMesh = new THREE.Mesh(mercurySphere, mercuryMaterial);
         scene.add(mercuryMesh);
 
         const venusSphere = new THREE.SphereGeometry(1,64,64);
         venusSphere.translate(0,0,-10);
-        const venusMaterial = new THREE.MeshStandardMaterial({
-            color:'#cf4d02'
-        })
+        const venusTexture = textureLoader.load(venusTextureImage);
+        const venusMaterial = new THREE.MeshBasicMaterial({map: venusTexture})
         const venusMesh = new THREE.Mesh(venusSphere, venusMaterial);
         scene.add(venusMesh)
 
         const marsSphere = new THREE.SphereGeometry(1,64,64);
         marsSphere.translate(0,0,-20);
-        const marsMaterial = new THREE.MeshStandardMaterial({
-            color:'#ca0000'
-        })
+        const marsTexture = textureLoader.load(marsTextureImage);
+        const marsMaterial = new THREE.MeshBasicMaterial({map: marsTexture})
         const marsMesh = new THREE.Mesh(marsSphere, marsMaterial);
         scene.add(marsMesh)
 
         const jupiterSphere = new THREE.SphereGeometry(2.5,64,64);
         jupiterSphere.translate(0,0,-25);
-        const jupiterMaterial = new THREE.MeshStandardMaterial({
-            color:'#ffc811'
-        })
+        const jupiterTexture = textureLoader.load(jupiterTextureImage);
+        const jupiterMaterial = new THREE.MeshBasicMaterial({map: jupiterTexture});
         const jupiterMesh = new THREE.Mesh(jupiterSphere, jupiterMaterial);
         scene.add(jupiterMesh)
 
         const saturnSphere = new THREE.SphereGeometry(3,64,64);
         saturnSphere.translate(0,0,-35);
-        const saturnMaterial = new THREE.MeshStandardMaterial({
-            color:'#d1ce0c'
-        })
+        const saturnTexture = textureLoader.load(saturnTextureImage);
+        const saturnMaterial = new THREE.MeshBasicMaterial({map: saturnTexture});
         const saturnMesh = new THREE.Mesh(saturnSphere, saturnMaterial);
         scene.add(saturnMesh)
 
-        const uranSphere = new THREE.SphereGeometry(2,64,64);
-        uranSphere.translate(0,0,-44);
-        const uranMaterial = new THREE.MeshStandardMaterial({
-            color:'#0cd1b7'
-        })
-        const uranMesh = new THREE.Mesh(uranSphere, uranMaterial);
-        scene.add(uranMesh)
+        const uranusSphere = new THREE.SphereGeometry(2,64,64);
+        uranusSphere.translate(0,0,-44);
+        const uranusTexture = textureLoader.load(uranusTextureImage);
+        const uranusMaterial = new THREE.MeshBasicMaterial({map: uranusTexture});
+        const uranusMesh = new THREE.Mesh(uranusSphere, uranusMaterial);
+        scene.add(uranusMesh)
 
         const neptuneSphere = new THREE.SphereGeometry(2.3,64,64);
         neptuneSphere.translate(0,0,-50);
-        const neptuneMaterial = new THREE.MeshStandardMaterial({
-            color:'#002fff'
-        })
+        const neptuneTexture = textureLoader.load(neptuneTextureImage);
+        const neptuneMaterial = new THREE.MeshBasicMaterial({map: neptuneTexture})
         const neptuneMesh = new THREE.Mesh(neptuneSphere, neptuneMaterial);
         scene.add(neptuneMesh)
 
-        const sunTexture = textureLouder.load('https://images-repo-resized.s3-eu-west-1.amazonaws.com/2020/05/20/f48f469bd71cd046d3e9cb340fb608ce_large.png')
+        const sunTexture = textureLoader.load(sunTextureImage);
 
         const SunSphere = new THREE.SphereGeometry(3,64,64);
         const SunMaterial = new THREE.MeshStandardMaterial({
             color: '#fdf909'
         });
         const sunTextureMaterial = new THREE.MeshBasicMaterial({map: sunTexture});
-        const SunMesh = new THREE.Mesh(SunSphere, SunMaterial);
+        const SunMesh = new THREE.Mesh(SunSphere, sunTextureMaterial);
         
         scene.add(SunMesh);
     

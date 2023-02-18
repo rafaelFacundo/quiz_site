@@ -1,15 +1,15 @@
 import React from "react";
 import LoginModal from "./components/LoginModal";
-import UniverseAnimation from "./components/UniverseAnimation";
+import UniverseAnimation from "../../components/UniverseAnimation";
 import {
-    MainContent,
-    H3
-} from "./styles";
+    Titles,
+    MainContent
+} from "../../components/styles";
 
 export default function LoginPage() {
     return(
-        <MainContent>
-            <H3>Discorver the universe across the quizzes</H3>
+        <MainContent contentDisplay={"flex"}>
+            <Titles titleFontSize={"40px"}>Discorver the universe across the quizzes</Titles>
             <LoginModal />
             <UniverseAnimation />
         </MainContent>

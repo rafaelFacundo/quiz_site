@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import ProfileIcon from "../../assets/profile_icon.png";
-import ChartIcon from "../../assets/Line_Chart_icon.png";
+import Header from "../../components/Header";
 import {
     MainContent,
-    ContedDiv,
+    ContedDiv
+} from "../../components/styles";
+import {
     Navigation,
     NavList,
     NavOption
@@ -11,7 +12,9 @@ import {
 import { Image, Text } from "../../components/styles";
 import ProfileInformation from "./components/ProfileInformations";
 import StatisticsComponent from "./components/Statistics";
-import Header from "../../components/Header";
+import ProfileIcon from "../../assets/profile_icon.png";
+import ChartIcon from "../../assets/Line_Chart_icon.png";
+
 
 export default function SettingsPage() {
     // In this hook we decide which section we'll show

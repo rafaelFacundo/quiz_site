@@ -3,9 +3,10 @@ import Header from "../../components/Header/index";
 import QuestionAndOptions from "./components/QuestionAndOptions";
 import {
     MainContent,
-    PlayQuizDiv,
+    QuizContents,
     ContedDiv
-} from "./style";
+} from "../../components/styles";
+
 
 
 export default function PlayQuizPage(){
@@ -64,9 +65,9 @@ export default function PlayQuizPage(){
         <MainContent>
             <Header />
             <ContedDiv>
-                <PlayQuizDiv>
+                <QuizContents>
                     <QuestionAndOptions ListOfQuestions={quiz.questions} />
-                </PlayQuizDiv>  
+                </QuizContents>  
             </ContedDiv>
             
         </MainContent>

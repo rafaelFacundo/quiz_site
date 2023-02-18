@@ -4,8 +4,10 @@ import RightArrow from "../../assets/right_arrow.png";
 import LeftArrow from "../../assets/left_arrow.png";
 import {
     MainContent,
-    ContedDiv,
-    CreateQuizDiv,
+    QuizContents,
+    ContedDiv
+} from "../../components/styles";
+import {
     AnswerOption,
     OptionsDiv,
     InputQuestion,
@@ -78,8 +80,6 @@ export default function CreateQuizPage() {
             setCurrentQuestion(listOfQuestions[currentId])
         }
     }
-
-    const [teste, setTeste] = useState("")
     
     return(
         <MainContent>
@@ -98,13 +98,13 @@ export default function CreateQuizPage() {
                     enabled={(currentId < listOfQuestions.length && currentId > -1) ? "all" : "none"}
                     onClick={() => {navigateThroughTheQuestions(+1)}}  
                 />
-                <CreateQuizDiv>
+                <QuizContents>
                     <InputsDiv>
                         <InputQuestion
                             value={currentQuestion.question}
                             placeholder="TYPE THE QUESTION HERE"
                             maxLength={200}
-                            onChange={(e) => {mountQuestion(e.target.value, 4); setTeste(e.target.value)}}
+                            onChange={(e) => {mountQuestion(e.target.value, 4);}}
                         />
                         <OptionsDiv>
                             <AnswerOption
@@ -151,7 +151,7 @@ export default function CreateQuizPage() {
                         </OptionsDiv>
                     </InputsDiv>
                     {isAllFiled && <H3>select the options that is the right answer!</H3>}
-                </CreateQuizDiv>
+                </QuizContents>
                 
                 <FinishQuestionButton
                     onClick={() => { isQuestionDone && saveQuestionAndNext();}}

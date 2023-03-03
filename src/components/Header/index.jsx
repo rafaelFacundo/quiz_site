@@ -12,27 +12,34 @@ import {
     InputIcon
 } from "./styles";
 import { Image } from "../styles";
+import { Link, redirect } from "react-router-dom";
 
 export default function Header() {
     return(
         <MainContent>
             <ContentDiv>
-                <Image
-                    src={SiteLogo}
-                    imgWidth={"120px"}
-                    imgHeight={"90px"}
-                />
+                <Link to={"/"}>
+                    <Image
+                        src={SiteLogo}
+                        imgWidth={"120px"}
+                        imgHeight={"90px"}
+                        
+                    />
+                </Link>
                 <ButtonSearchDiv>
                     <SearchInput type="text" placeholder="SEARCH HERE"/>
                     <InputIcon src={MagnifyingGlass}/>
                 </ButtonSearchDiv>
                 <UserAndButtonDiv>
-                    <CreateQuizButton>CREATE QUIZ</CreateQuizButton>
-                    <Image
+                    <CreateQuizButton><Link to={'/createQuiz'}>CREATE QUIZ</Link></CreateQuizButton>
+                    <Link to={"/settings"}>
+                        <Image
                         src={ProfileIcon}
                         imgWidth={"55px"}
                         imgHeight={"55px"}
-                    />  
+                        />  
+                    </Link>
+                     
                 </UserAndButtonDiv>
             </ContentDiv>
         </MainContent>

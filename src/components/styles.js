@@ -30,6 +30,9 @@ const Image = styled.img`
     width: ${props => props.imgWidth || "30px"};
     height: ${props => props.imgHeight || "30px"};
     
+    &:hover {
+        cursor: pointer;
+    }
 `;
 const Titles = styled.h3`
     margin-bottom: 15px;
@@ -66,6 +69,32 @@ const ContedDiv = styled.div`
     padding: 10px;
 `;
 
+const LoginSignUpDiv = styled.div`
+    width: 400px;
+    height: 550px;
+    border-radius: 70px;
+    box-shadow: 4px 0px 20px rgba(0,0,0,0.25); 
+    background-color: white;
+    color: black;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+`;
+
+const MainContentLoginSignUp = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+`
+
+const H3 = styled.h3`
+    margin-bottom: 15px;
+    margin-top: 25px;
+    font-family: 'Holtwood One SC', 'arial';
+    font-size: 48px;
+    
+`;
+
 export {
     LoginButton,
     Text,
@@ -73,5 +102,8 @@ export {
     Titles,
     MainContent,
     QuizContents,
-    ContedDiv
+    ContedDiv,
+    LoginSignUpDiv,
+    MainContentLoginSignUp,
+    H3
 }

@@ -11,7 +11,7 @@ export default function LoginPage() {
         <MainContent contentDisplay={"flex"}>
             <Titles titleFontSize={"40px"}>Discorver the universe across the quizzes</Titles>
             <LoginModal />
-            <UniverseAnimation />
+            {/* <UniverseAnimation /> */}
         </MainContent>
     );
 }

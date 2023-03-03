@@ -38,6 +38,46 @@ const Input = styled.input`
     border: 2.5px solid lightgray;
 `
 
+const LoginOptionDiv = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 60px;
+`;
+
+const LoginOptionIcon = styled.img`
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 1px;
+`;
+
+const LoginOptionsList = styled.ul`
+    display: ${props => props.listDisplay ? "auto" : "none"};
+    list-style: none;
+    position: absolute;
+    top: -235px;
+    width: 50px;
+    padding: 6px;
+    padding-left: 0;
+    padding-right: 0;
+    box-sizing: border-box;
+    * {
+        margin-bottom: 2px;
+        transition: all 1s;
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    *:hover {
+        background-color: lightgray;
+    }
+`;
+
+const LoginOption = styled.li``;
 
 export {
     MainDiv,
@@ -45,4 +85,8 @@ export {
     H3,
     Label, 
     Input,
+    LoginOptionIcon,
+    LoginOptionDiv,
+    LoginOptionsList,
+    LoginOption,
 }

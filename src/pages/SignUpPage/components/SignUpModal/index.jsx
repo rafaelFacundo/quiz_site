@@ -4,18 +4,20 @@ import FacebookIcon from '../../../../assets/facebook_icon.png';
 import SnapIcon from '../../../../assets/snap_icon.png';
 import TwitterIcon from '../../../../assets/twitter_icon.png';
 import TikTokIcon from '../../../../assets/tiktok_icon.png';
-import {
-    MainDiv,
-    MainContent,
-    H3,
-} from './styles'
-import { LoginButton, Text, Image } from "../../../../components/styles";
+import { 
+    LoginButton,
+    Text,
+    Image,
+    LoginSignUpDiv,
+    MainContentLoginSignUp,
+    H3
+} from "../../../../components/styles";
 import { Link } from "react-router-dom";
 
-export default function SignUpModal() {
+export default function SignUpModal() { 
     return(
-        <MainDiv>
-            <MainContent>
+        <LoginSignUpDiv>
+            <MainContentLoginSignUp>
                 <H3>SIGN UP</H3>
                 <Text>Choose the best way to you sign up: </Text>
                 <LoginButton>
@@ -44,8 +46,8 @@ export default function SignUpModal() {
                 >
                    <Link to={'/login'}>BACK TO LOGIN</Link>
                 </Text>
-            </MainContent>
-        </MainDiv>
+            </MainContentLoginSignUp>
+        </LoginSignUpDiv>
         
     );
 }

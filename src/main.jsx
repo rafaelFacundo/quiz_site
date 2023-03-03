@@ -10,14 +10,13 @@ import NotFoundURLPage from './pages/NotFoundURLPage';
 import './index.css'
 import {
   createBrowserRouter,
-  RouterProvider,
-  Link
+  RouterProvider
 } from 'react-router-dom'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />
+    element: <HomePage />,
   },
   {
     path: '/login',
@@ -43,7 +42,10 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </>
 )
+
+
+/*   */

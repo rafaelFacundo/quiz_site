@@ -24,6 +24,9 @@ const CreateQuizButton = styled.button`
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     margin-right: 20px;
+    * {
+        text-decoration: none;
+    }
 `
 const ButtonSearchDiv = styled.div`
     display: flex;

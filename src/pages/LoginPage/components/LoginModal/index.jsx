@@ -25,17 +25,27 @@ import {
 import { useState } from "react";
 
 export default function LoginModal() {
+    function ListOption(iconImage, name) {
+        this.img = iconImage;
+        this.name = name;
+    }
     const [showOptions, setShowOptions] = useState(false);
-    const [currentLoginOption, setCurrentLoginOption] = useState({
-        loginOptionIcon: GoogleIcon,
-        loginOptionName: "Google"
-    });
+    const [loginOptionsList, setLoginOptionsList] = useState(
+        [  
+            new ListOption(FacebookIcon, "Facebook"),
+            new ListOption(SnapIcon, "Snap"),
+            new ListOption(TwitterIcon, "Twitter"),
+            new ListOption(TikTokIcon, "TikTok")
+        ]
+    )
+    const [currentLoginOption, setCurrentLoginOption] = useState(new ListOption(GoogleIcon, "Google"));
 
-    function changeLoginOption(loginOpName, loginOpImg) {
-        let newCurreLoginOption = {...currentLoginOption};
-        newCurreLoginOption.loginOptionName = loginOpName;
-        newCurreLoginOption.loginOptionIcon = loginOpImg;
-        setCurrentLoginOption(newCurreLoginOption);
+    function changeLoginOption(optionIndex) {
+        const optionSelected = loginOptionsList.splice(optionIndex,1)[0];
+        const newLoginOptionsList = [...loginOptionsList];
+        newLoginOptionsList.push(currentLoginOption);
+        setCurrentLoginOption(optionSelected);
+        setLoginOptionsList(newLoginOptionsList);
         setShowOptions(!showOptions);
     }
 
@@ -61,31 +71,26 @@ export default function LoginModal() {
                 <LoginButton>
                     <LoginOptionDiv>
                         <LoginOptionsList listDisplay={showOptions}>
-                            <LoginOption onClick={() => {changeLoginOption("Google", GoogleIcon)}}>
-                                <Image imgMargin={"0"} src={GoogleIcon}/>
-                            </LoginOption>
-                            <LoginOption onClick={() => {changeLoginOption("Facebook", FacebookIcon)}}>
-                                <Image imgMargin={"0"} src={FacebookIcon}/>
-                            </LoginOption>
-                            <LoginOption onClick={() => {changeLoginOption("Snap", SnapIcon)}} >
-                                <Image imgMargin={"0"} src={SnapIcon}/>
-                            </LoginOption>
-                            <LoginOption onClick={() => {changeLoginOption("Twitter", TwitterIcon)}} >
-                                <Image imgMargin={"0"} src={TwitterIcon}/>
-                            </LoginOption>
-                            <LoginOption onClick={() => {changeLoginOption("TikTok", TikTokIcon)}} >
-                                <Image imgMargin={"0"} src={TikTokIcon}/>
-                            </LoginOption>
+                            {
+                                loginOptionsList.map((loginOption, index) => {
+                                    return(
+                                        <LoginOption key={index}  onClick={() => {changeLoginOption(index)}}>
+                                            <Image imgMargin={"0"} src={loginOption.img} />
+                                        </LoginOption>
+                                    );
+                                })
+                            }
                         </LoginOptionsList>
                         <LoginOptionIcon 
                             src={ArrowDown}
                         />
                         <Image
                             onClick={() => {setShowOptions(!showOptions)}}
-                            src={currentLoginOption.loginOptionIcon}
+                            src={currentLoginOption.img}
                         />
                     </LoginOptionDiv>
-                    Make login with {currentLoginOption.loginOptionName}
+                    <Link to={'/auth/login/google'}>Make login with {currentLoginOption.name}</Link>
+                    
                 </LoginButton>
                 <Text textSize="12px" >If you do not have an account</Text>
                 <Text 

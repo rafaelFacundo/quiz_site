@@ -58,7 +58,7 @@ const LoginOptionsList = styled.ul`
     display: ${props => props.listDisplay ? "auto" : "none"};
     list-style: none;
     position: absolute;
-    top: -235px;
+    top: -200px;
     width: 50px;
     padding: 6px;
     padding-left: 0;

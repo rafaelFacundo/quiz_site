@@ -11,7 +11,7 @@ export default function SignUpPage() {
         <MainContent>
             <Titles titleFontSize={"40px"}>Discorver the universe across the quizzes</Titles>
             <SignUpModal />
-            <UniverseAnimation />
+            {/* <UniverseAnimation /> */}
         </MainContent>
     );
 }

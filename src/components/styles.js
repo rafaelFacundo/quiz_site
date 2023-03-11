@@ -51,13 +51,14 @@ const MainContent = styled.div`
     width: 100vw;
     height: 100vh;
     display: ${ props => props.contentDisplay || "block"};
+    flex-direction: ${props => props.flexDirection};
 `;
-const QuizContents = styled.div`
+const ContentsSquare = styled.div`
     background-color: white;
     box-shadow: 4px 0px 20px rgba(0,0,0,0.25);
     border-radius: 20px;
-    width: 900px; 
-    height: 500px;
+    width: ${props => props.contentWidth || "900px"}; 
+    height: ${props => props.contentHeight || "500px"};
     box-sizing: border-box;
     padding: 15px;
 `;
@@ -67,6 +68,7 @@ const ContedDiv = styled.div`
     justify-content: space-around;
     box-sizing: border-box;
     padding: 10px;
+    flex: 1;
 `;
 
 const LoginSignUpDiv = styled.div`
@@ -95,15 +97,27 @@ const H3 = styled.h3`
     
 `;
 
+const DivToManageDisplay = styled.div`
+    display: ${props => props.display || "initial"};
+    flex-direction: ${props => props.flexDirection || "initial"};
+    align-items: ${props => props.alignItems || "initial"};
+    justify-content: ${props => props.justifyContent || "inital"};
+    flex: ${props => props.flex || "auto"};
+    width: ${props => props.width || "auto"};
+    height: ${props => props.height || "auto"};
+    box-sizing: ${props => props.boxSizing || "initial"};
+`;
+
 export {
     LoginButton,
     Text,
     Image,
     Titles,
     MainContent,
-    QuizContents,
+    ContentsSquare,
     ContedDiv,
     LoginSignUpDiv,
     MainContentLoginSignUp,
-    H3
+    H3,
+    DivToManageDisplay
 }

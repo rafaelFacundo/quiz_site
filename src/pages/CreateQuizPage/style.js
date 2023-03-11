@@ -1,28 +1,5 @@
 import styled from "styled-components";
 
-const MainContent = styled.div`
-    background-color: white;
-    width: 100vw;
-    height: 100vh;
-`;
-const ContedDiv = styled.div`
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-around;
-    box-sizing: border-box;
-    padding: 10px;
-    
-`;
-const CreateQuizDiv = styled.div`
-    background-color: white;
-    box-shadow: 4px 0px 20px rgba(0,0,0,0.25);
-    border-radius: 20px;
-    width: 900px; 
-    height: 500px;
-    box-sizing: border-box;
-    padding: 15px;
-`;
-
 const AnswerOption = styled.input`
     width: 350px;
     height: 50px;
@@ -38,6 +15,7 @@ const AnswerOption = styled.input`
     box-sizing: border-box;
     padding: 7px;
     border: none;
+    pointer-events: ${props => props.enabled};
 `;
 const OptionsDiv = styled.div`
     display: flex;
@@ -45,10 +23,10 @@ const OptionsDiv = styled.div`
     align-items: center;
     justify-content: center;
 `;
-const InputQuestion = styled.textarea`
+const InputTitles = styled.textarea`
     font-size: 20px;
     width: 90%;
-    height: 100px;
+    height: ${props => props.inputHeight || "100px"};
     margin: 5px;
     resize: none;
     border: none;
@@ -56,7 +34,9 @@ const InputQuestion = styled.textarea`
     &:focus {
         outline: none;
         border-bottom: 1px solid lightgreen;
-    }
+    };
+    pointer-events: ${props => props.enabled};
+    
 `;
 const InputsDiv = styled.div`
     display: flex;
@@ -93,22 +73,20 @@ const FinishQuestionButton = styled.button`
     justify-content: space-around;
     font-weight: bold;
     position: absolute;
-    bottom: 30px;
-    right: 15px;
+    bottom: ${props => props.btBottom };
+    right: ${props => props.btRight };
+    pointer-events: ${props => props.enabled};
 `;
 const H3 = styled.h3`
     color: black;
 `;
 
 export {
-    MainContent,
-    ContedDiv,
-    CreateQuizDiv,
     AnswerOption,
     OptionsDiv,
-    InputQuestion,
+    InputTitles,
     InputsDiv,
     Image,
     FinishQuestionButton,
-    H3
+    H3,
 }

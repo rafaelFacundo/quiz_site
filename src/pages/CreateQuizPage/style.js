@@ -47,9 +47,9 @@ const InputsDiv = styled.div`
     height: 70%;
 `;
 const Image = styled.img`
-    width: 50px;
-    height: 60px;
-    position: absolute;
+    width: ${props => props.width || "auto"};
+    height: ${props => props.height || "auto"};
+    position: ${props => props.position || "initial"};
     top: ${props => props.Top || "auto"};
     right: ${props => props.Right || "auto"};
     left: ${props => props.Left || "auto"};
@@ -59,7 +59,7 @@ const Image = styled.img`
         transform: scale(1.3);
         
     }
-    pointer-events: ${props => props.enabled};
+    pointer-events: ${props => props.enabled || "all"};
 `;
 const FinishQuestionButton = styled.button`
     border-radius: 50px;

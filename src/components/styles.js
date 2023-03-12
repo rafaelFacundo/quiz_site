@@ -29,7 +29,6 @@ const Text = styled.p`
 const Image = styled.img`
     width: ${props => props.imgWidth || "30px"};
     height: ${props => props.imgHeight || "30px"};
-    
     &:hover {
         cursor: pointer;
     }

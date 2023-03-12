@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Header from "../../components/Header";
 import RightArrow from "../../assets/right_arrow.png";
 import LeftArrow from "../../assets/left_arrow.png";
+import EditQuizIcon from "../../assets/editQuestion_icon.png";
+import DeleteQuizIcon from "../../assets/deleteQuestion_icon.png";
 import {
     MainContent,
     ContentsSquare,
@@ -18,15 +20,17 @@ import {
     H3,
 } from "./style";
 
-let currentId = -1;
+let currentId = 0;
 export default function CreateQuizPage() {
     /* 
         status = 0 -> in progress
-        status = 1 -> done, but not added
-        status = 2 -> done and added
+        status = 1 -> done, but right option not selected
+        status = 2 -> all done, can select now and it's not saved
+        status = 3 -> all done and saved
     */
     const questionPattern = {
         question: "",
+        id: 0,
         status: 0,
         options: [
             {text: "", iR: false},
@@ -46,8 +50,7 @@ export default function CreateQuizPage() {
             quiz_cover: null,
             number_of_players: 0,
             questions: listOfQuestions
-        }
-        console.log(newQuiz)
+        };
     }
 
     function mountQuestion(text,index) {
@@ -70,23 +73,24 @@ export default function CreateQuizPage() {
 
     function saveQuestionAndNext() {
         const questionToPush = {...currentQuestion}
-        questionToPush.status = 2;
-        listOfQuestions.push(questionToPush);
-        console.log(listOfQuestions);
-        setCurrentQuestion(questionPattern);
-        if (currentId == -1) {
-            currentId += 2;
-        }else{
-            currentId += 1;
+        questionToPush.status = 3;
+        questionToPush.id = currentId;
+        let indexOfQuestion = listOfQuestions.findIndex(question => question.id === currentQuestion.id);
+        if (indexOfQuestion == -1) {
+            listOfQuestions.push(questionToPush);
+        }else {
+            listOfQuestions[indexOfQuestion] = questionToPush; 
         }
-    };
+        setCurrentQuestion(questionPattern);
+        currentId += 1;
+    }
 
     function navigateThroughTheQuestions(numberToAdd) {
         currentId += numberToAdd;
         if (currentId >= listOfQuestions.length) {
             setCurrentQuestion(questionPattern);
         }else {
-            setCurrentQuestion(listOfQuestions[currentId])
+            setCurrentQuestion(listOfQuestions[currentId]);
         }
     }
 
@@ -94,7 +98,28 @@ export default function CreateQuizPage() {
         let newObjectQuestion = {...currentQuestion};
         newObjectQuestion.options.map((option)=>{option.iR = false});
         newObjectQuestion.options[index].iR = true;
+        newObjectQuestion.status = 2;
         setCurrentQuestion(newObjectQuestion);
+    }
+
+    function editQuestion() {
+        let newObjectQuestion = {...currentQuestion};
+        newObjectQuestion.options.map((option)=>{option.iR = false});
+        newObjectQuestion.status = 1;
+        setCurrentQuestion(newObjectQuestion);
+    }
+
+    function deleteQuestion() {
+        listOfQuestions.splice(currentId, 1);
+        if (currentId != 0) {
+            currentId -= 1;
+        }
+        if(currentId >= 0 && listOfQuestions.length >= 1){
+            setCurrentQuestion(listOfQuestions[currentId]);
+        }else {
+            setCurrentQuestion(questionPattern);
+        }
+
     }
     
     return(
@@ -115,15 +140,18 @@ export default function CreateQuizPage() {
                 >
                     <Image
                         src={LeftArrow}
-                        Top={"50vh"}
-                        Left={"30px"}
-                        enabled={(currentId > 0) ? "all" : "none"}
+                        position={"absolute"}
+                        width={"50px"} height={"60px"}
+                        Top={"50vh"} Left={"30px"}
+                        enabled={(currentId > 0 && (currentQuestion.status != 1 && currentQuestion.status != 2 )) ? "all" : "none"}
                         onClick={() => {navigateThroughTheQuestions(-1)}}
                     />
                     <Image
                         src={RightArrow}
+                        position={"absolute"}
+                        width={"50px"} height={"60px"}
                         Top={"50vh"} Right={"30px"}
-                        enabled={(currentId < listOfQuestions.length && currentId > -1) ? "all" : "none"}
+                        enabled={(currentId < listOfQuestions.length && currentId > -1 && (currentQuestion.status != 1 && currentQuestion.status != 2 )) ? "all" : "none"}
                         onClick={() => {navigateThroughTheQuestions(+1)}}  
                     />
                     <ContentsSquare contentHeight={"100px"}>
@@ -146,36 +174,60 @@ export default function CreateQuizPage() {
                         </DivToManageDisplay>
                     </ContentsSquare>
                     <ContentsSquare contentHeight={"300px"}>
-                        <InputsDiv>
-                            <InputTitles
-                                value={currentQuestion.question}
-                                placeholder="TYPE THE QUESTION HERE"
-                                maxLength={200}
-                                onChange={(e) => {mountQuestion(e.target.value, 4);}}
-                                enabled={(currentQuestion.status <= 1) ? "all" : "none"}
-                            />
-                            <OptionsDiv>
-                                {
-                                    currentQuestion.options.map((option, index) => {
-                                        return(
-                                            <AnswerOption
-                                                key={index}
-                                                value={option.text}
-                                                selected={(option.iR) && "green"}
-                                                placeholder={`${index+1}° OPTION HERE`}
-                                                maxLength={60}
-                                                onChange={(e) => {
-                                                    mountQuestion(e.target.value,index);
-                                                }}
-                                                onClick={() => {(currentQuestion.status === 1) && selectTheRightOPtion(index)}}
-                                                enabled={(currentQuestion.status <= 1 ) ? "all" : "none"}
-                                            />
-                                        );
-                                    })
-                                }
-                            </OptionsDiv>
-                        </InputsDiv>
-                        { (currentQuestion.status === 1 ) && <H3>select the options that is the right answer!</H3>}
+                        <DivToManageDisplay 
+                            display={"flex"}
+                            alignItems={"center"}
+                            justifyContent={"center"}
+                            boxSizing={"border-box"}
+                            width={"100%"}
+                            height={"100%"}
+                            flexDirection={"column"}
+                        >
+                            <InputsDiv>
+                                <InputTitles
+                                    value={currentQuestion.question}
+                                    placeholder="TYPE THE QUESTION HERE"
+                                    maxLength={200}
+                                    onChange={(e) => {mountQuestion(e.target.value, 4);}}
+                                    enabled={(currentQuestion.status <= 2) ? "all" : "none"}
+                                />
+                                <OptionsDiv>
+                                    {
+                                        currentQuestion.options.map((option, index) => {
+                                            return(
+                                                <AnswerOption
+                                                    key={index}
+                                                    value={option.text}
+                                                    selected={(option.iR) && "green"}
+                                                    placeholder={`${index+1}° OPTION HERE`}
+                                                    maxLength={60}
+                                                    onChange={(e) => {
+                                                        mountQuestion(e.target.value,index);
+                                                    }}
+                                                    onClick={() => {(currentQuestion.status <= 2) && selectTheRightOPtion(index)}}
+                                                    enabled={(currentQuestion.status <= 2 ) ? "all" : "none"}
+                                                />
+                                            );
+                                        })
+                                    }
+                                </OptionsDiv>
+                            </InputsDiv>
+                            { (currentQuestion.status === 1 ) && <H3>select the options that is the right answer!</H3>}
+                            {
+                                (currentQuestion.status === 3) && (
+                                    <DivToManageDisplay
+                                        display={"flex"}
+                                        alignItems={"center"}
+                                        justifyContent={"space-around"}
+                                        boxSizing={"border-box"}
+                                        width={"20%"}
+                                    >
+                                        <Image onClick={() => {deleteQuestion()}} src={DeleteQuizIcon} width={"40px"} height={"50px"} />
+                                        <Image onClick={() => {editQuestion()}} src={EditQuizIcon} width={"30px"} height={"40px"} />
+                                    </DivToManageDisplay>
+                                )
+                            }
+                        </DivToManageDisplay>
                     </ContentsSquare>
                     <FinishQuestionButton
                         btBottom={"80px"}
@@ -188,10 +240,10 @@ export default function CreateQuizPage() {
                     <FinishQuestionButton
                         btBottom={"30px"}
                         btRight={"15px"}
-                        onClick={() => { (currentQuestion.status == 1) && saveQuestionAndNext();}}
-                        enabled={(currentQuestion.status === 1) ? "all" : "none"}
+                        onClick={() => { (currentQuestion.status == 2) && saveQuestionAndNext();}}
+                        enabled={(currentQuestion.status === 2) ? "all" : "none"}
                     >
-                        FINISH AND ADD 
+                        SAVE QUESTION
                     </FinishQuestionButton>
                 </DivToManageDisplay>
             </ContedDiv>

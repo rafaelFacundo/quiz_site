@@ -67,7 +67,7 @@ export default function CreateQuizPage() {
                 numberOfOptionsFiled += 1;
         });
         if (newObject.question.length > 0 && numberOfOptionsFiled == 4){
-            newObject.status = 1;
+            newObject.status = 2;
         }
         setCurrentQuestion(newObject);
     }
@@ -215,7 +215,7 @@ export default function CreateQuizPage() {
                                                     onChange={(e) => {
                                                         mountQuestion(e.target.value,index);
                                                     }}
-                                                    onClick={() => {(currentQuestion.status <= 2) && selectTheRightOPtion(index)}}
+                                                    onClick={() => {(currentQuestion.status === 2) && selectTheRightOPtion(index)}}
                                                     enabled={(currentQuestion.status <= 2 ) ? "all" : "none"}
                                                 />
                                             );
@@ -223,7 +223,7 @@ export default function CreateQuizPage() {
                                     }
                                 </OptionsDiv>
                             </InputsDiv>
-                            { (currentQuestion.status === 1 ) && <H3>select the options that is the right answer!</H3>}
+                            { (currentQuestion.status === 2 ) && <H3>select the options that is the right answer!</H3>}
                             {
                                 (currentQuestion.status === 3) && (
                                     <DivToManageDisplay

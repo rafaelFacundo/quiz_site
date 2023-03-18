@@ -22,6 +22,7 @@ import {
 
 let currentId = 0;
 export default function CreateQuizPage() {
+    
     /* 
         status = 0 -> in progress
         status = 1 -> done, but right option not selected
@@ -72,17 +73,23 @@ export default function CreateQuizPage() {
     }
 
     function saveQuestionAndNext() {
+    
+       
         const questionToPush = {...currentQuestion}
         questionToPush.status = 3;
         questionToPush.id = currentId;
-        let indexOfQuestion = listOfQuestions.findIndex(question => question.id === currentQuestion.id);
+        let indexOfQuestion = listOfQuestions.findIndex(question => question.id === questionToPush.id);
+      
         if (indexOfQuestion == -1) {
+            
             listOfQuestions.push(questionToPush);
         }else {
             listOfQuestions[indexOfQuestion] = questionToPush; 
         }
         setCurrentQuestion(questionPattern);
         currentId += 1;
+
+        
     }
 
     function navigateThroughTheQuestions(numberToAdd) {
@@ -92,6 +99,10 @@ export default function CreateQuizPage() {
         }else {
             setCurrentQuestion(listOfQuestions[currentId]);
         }
+
+        console.log(currentId)
+        console.log("questão")
+        console.log(listOfQuestions[currentId])
     }
 
     function selectTheRightOPtion(index) {
